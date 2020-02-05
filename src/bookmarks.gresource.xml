@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/byteheathen/BookMarks">
+    <file>ui/window.ui</file>
+    <file>ui/forms/quick-create-bookmark.ui</file>
+    <file>ui/delete-bookmark.ui</file>
+    <file>ui/forms/quick-create-tag.ui</file>
+    <file>ui/delete-tag.ui</file>
+    <file>ui/forms/quick-create-folder.ui</file>
+    <file>styles/bookmark.css</file>
+    <file>styles/tag.css</file>
+  </gresource>
+</gresources>

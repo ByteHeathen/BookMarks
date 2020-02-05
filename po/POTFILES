@@ -1,0 +1,7 @@
+data/org.byteheathen.BookMarks.desktop.in
+data/org.byteheathen.BookMarks.appdata.xml.in
+data/org.byteheathen.BookMarks.gschema.xml
+src/window.ui
+src/main.py
+src/window.py
+
