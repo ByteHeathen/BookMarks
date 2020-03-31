@@ -4,6 +4,7 @@ from pybookmarks import BookMark
 from .BookMarkCard import BookMarkCard
 from .QuickCreateBookMark import QuickCreateBookMark
 from .DeleteBookMark import DeleteBookMark
+from .FlatButton import FlatButton
 
 class BottomBar(Gtk.ButtonBox):
 
@@ -12,14 +13,9 @@ class BottomBar(Gtk.ButtonBox):
         self.page = page
         self.createPopover = None
         self.deletePopover = None
-        self.createImage = Gtk.Image.new_from_icon_name("list-add", 0)
-        self.createButton = Gtk.Button()
-        self.createButton.add(self.createImage)
+        self.createButton = FlatButton(icon='list-add')
         self.createButton.connect("clicked", self.onCreateClicked)
-        self.deleteButton = Gtk.Button()
-        self.deleteButton.connect("clicked", self.onDeleteClicked)
-        self.deleteImage = Gtk.Image.new_from_icon_name("user-trash", 0)
-        self.deleteButton.add(self.deleteImage)
+        self.deleteButton = FlatButton(icon='user-trash')
         self.add(self.createButton)
         self.add(self.deleteButton)
 

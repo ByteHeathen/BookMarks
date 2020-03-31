@@ -30,8 +30,7 @@ class Application(Gtk.Application):
         super().__init__(application_id='org.byteheathen.BookMarks',
                          flags=Gio.ApplicationFlags.FLAGS_NONE)
         self.styleProvider = Gtk.CssProvider()
-        self.styleProvider.load_from_resource("/org/byteheathen/BookMarks/styles/bookmark.css")
-        self.styleProvider.load_from_resource("/org/byteheathen/BookMarks/styles/tag.css")
+        self.styleProvider.load_from_resource("/org/byteheathen/BookMarks/ui/styles.css")
 
         Gtk.StyleContext.add_provider_for_screen(
             Gdk.Screen.get_default(), self.styleProvider,

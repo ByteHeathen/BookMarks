@@ -1,5 +1,7 @@
 from gi.repository import Gtk
 
+from .FlatButton import FlatButton
+
 class FolderCard(Gtk.ListBoxRow):
 
     def __init__(self, folder, callBack, **kwargs):
@@ -13,7 +15,7 @@ class FolderCard(Gtk.ListBoxRow):
 
         self.topBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         self.label = Gtk.Label(label=self.folder.label)
-        self.chooseButton = Gtk.Button(label="⮞")
+        self.chooseButton = FlatButton(label="⮞")
         self.chooseButton.connect("clicked", self.onSelectClicked)
         self.box.add(self.label)
         self.box.pack_end(self.chooseButton, False, False, 0)

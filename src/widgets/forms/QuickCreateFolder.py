@@ -35,8 +35,11 @@ class QuickCreateFolder(Gtk.Popover):
         if parent == None:
             Folder.create(label=name)
         else:
-            raw_parent = self.list.get_iter([parent, 0])
-            Folder.create(label=name, parent=self.list[raw_parent][0])
+            if parent != -1:
+              raw_parent = self.list[self.list.get_iter([parent, 0])][0]
+            else:
+              raw_parent = None
+            Folder.create(label=name, parent=raw_parent)
         self.cancelCallback(self, reload=True)
 
     def load(self):

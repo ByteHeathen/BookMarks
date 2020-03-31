@@ -1,7 +1,8 @@
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 
 from .FolderDisplay import FolderDisplay
 from .TagBadge import TagBadge
+from .FlatButton import FlatButton
 
 from pybookmarks import Folder
 
@@ -10,6 +11,7 @@ class BookMarkCard(Gtk.ListBoxRow):
     def __init__(self, bookmark, **kwargs):
         super().__init__(**kwargs)
         self.bookmark = bookmark
+        self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
         self.iconTheme = Gtk.IconTheme()
         self.tagList = Gtk.ListBox()
         self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -19,23 +21,24 @@ class BookMarkCard(Gtk.ListBoxRow):
         self.topBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         self.vbox.add(self.topBox)
 
-        if self.bookmark.starred == False:
-            self.starButton = Gtk.Button()
-            self.starButton.add(Gtk.Image.new_from_icon_name("starred-symbolic", 0))
-            self.topBox.add(self.starButton)
-        else:
-            icon = Gtk.Image.new_from_icon_name("starred-symbolic", 0)
-            Gtk.StyleContext.add_class(icon.get_style_context(), "starred")
-            self.starButton = Gtk.Button()
-            Gtk.StyleContext.add_class(self.starButton.get_style_context(), "starred")
-            self.starButton.add(Gtk.Image.new_from_icon_name("starred-symbolic", 0))
-            self.topBox.add(self.starButton)
+        self.starButton = FlatButton(icon='starred-symbolic')
+        self.topBox.add(self.starButton)
         self.starButton.connect("clicked", self.toggleStarred)
+        if self.bookmark.starred:
+            Gtk.StyleContext.add_class(self.starButton.get_style_context(), "starred")
 
         if self.bookmark.folder is not None:
             self.topBox.pack_end(FolderDisplay(Folder.find(self.bookmark.folder)), False, False, 0)
-        else:
-            self.topBox.pack_end(FolderDisplay(None), False, False, 0)
+
+        self.openButton = Gtk.LinkButton(self.bookmark.url)
+        Gtk.StyleContext.add_class(self.openButton.get_style_context(), "borderless")
+        self.openIcon = Gtk.Image.new_from_icon_name('window', 0)
+        self.openButton.add(self.openIcon)
+        self.topBox.pack_end(self.openButton, False, False, 0)
+
+        self.copyButton = FlatButton(icon='edit-copy')
+        self.copyButton.connect("clicked", self.copyClicked)
+        self.topBox.pack_end(self.copyButton, False, False, 0)
 
         if self.bookmark.label != None:
             self.maybeLabel = Gtk.Label(label=self.bookmark.label)
@@ -53,6 +56,9 @@ class BookMarkCard(Gtk.ListBoxRow):
         for tag in self.bookmark.tags():
             self.tagList.add(TagBadge(tag))
         self.vbox.add(self.tagList)
+
+    def copyClicked(self, widget):
+        self.clipboard.set_text(self.bookmark.url, -1)
 
     def toggleStarred(self, widget):
         if self.bookmark.starred == False:

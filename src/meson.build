@@ -40,7 +40,9 @@ bookmarks_sources = [
   'widgets/DeleteTag.py',
   'widgets/TagBadge.py',
   'widgets/forms/QuickCreateFolder.py',
-  'widgets/FolderCard.py'
+  'widgets/FolderCard.py',
+  'widgets/FlatButton.py',
+  'widgets/DeleteFolder.py'
 ]
 
 install_data(bookmarks_sources, install_dir: moduledir)

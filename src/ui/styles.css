@@ -10,3 +10,14 @@ button.starred {
   font-size: 0.75em;
 }
 
+.tag-card {
+  margin:4px;
+}
+
+.borderless {
+  border: None;
+}
+
+.marginless {
+  margin: 0px;
+}

@@ -7,7 +7,7 @@
     <file>ui/forms/quick-create-tag.ui</file>
     <file>ui/delete-tag.ui</file>
     <file>ui/forms/quick-create-folder.ui</file>
-    <file>styles/bookmark.css</file>
-    <file>styles/tag.css</file>
+    <file>ui/delete-folder.ui</file>
+    <file>ui/styles.css</file>
   </gresource>
 </gresources>
